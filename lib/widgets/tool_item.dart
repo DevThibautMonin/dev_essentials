@@ -36,10 +36,11 @@ class ToolItem extends StatelessWidget {
                     color: Colors.white,
                   ),
                   Gaps.gap15W,
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
