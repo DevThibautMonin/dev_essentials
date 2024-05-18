@@ -47,16 +47,19 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: JsonFormatterTextField(
-                      controller: jsonInputController,
-                      readOnly: false,
-                      hintText: '{ "Key": "Value" }',
-                      onCopy: () {
-                        copyToClipboard(jsonInputController.text);
-                      },
-                      onChanged: (value) {
-                        formatJson();
-                      },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: JsonFormatterTextField(
+                        controller: jsonInputController,
+                        readOnly: false,
+                        hintText: '{ "Key": "Value" }',
+                        onCopy: () {
+                          copyToClipboard(jsonInputController.text);
+                        },
+                        onChanged: (value) {
+                          formatJson();
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -69,13 +72,16 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: JsonFormatterTextField(
-                      controller: jsonOutputController,
-                      readOnly: true,
-                      hintText: '{\n  "Key" : "Value"\n}',
-                      onCopy: () {
-                        copyToClipboard(jsonOutputController.text);
-                      },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: JsonFormatterTextField(
+                        controller: jsonOutputController,
+                        readOnly: true,
+                        hintText: '{\n  "Key" : "Value"\n}',
+                        onCopy: () {
+                          copyToClipboard(jsonOutputController.text);
+                        },
+                      ),
                     ),
                   ),
                 ],
