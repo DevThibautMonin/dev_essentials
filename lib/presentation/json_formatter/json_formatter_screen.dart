@@ -1,6 +1,8 @@
 import 'dart:convert';
-
+import 'package:dev_essentials/presentation/json_formatter/json_formatter_textfield.dart';
+import 'package:dev_essentials/widgets/gaps.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class JsonFormatterScreen extends StatefulWidget {
   const JsonFormatterScreen({super.key});
@@ -25,6 +27,13 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
     }
   }
 
+  void copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Texte copié')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,36 +47,35 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: TextField(
+                    child: JsonFormatterTextField(
                       controller: jsonInputController,
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                      expands: true,
-                      decoration: const InputDecoration(border: InputBorder.none, hintText: '{ "Key": "Value" }'),
+                      readOnly: false,
+                      hintText: '{ "Key": "Value" }',
+                      onCopy: () {
+                        copyToClipboard(jsonInputController.text);
+                      },
                       onChanged: (value) {
                         formatJson();
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            const VerticalDivider(),
+            Gaps.gap10W,
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(
-                      child: TextField(
-                        readOnly: true,
-                        controller: jsonOutputController,
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                        expands: true,
-                        decoration: const InputDecoration(border: InputBorder.none, hintText: '{\n  "Key" : "Value"\n}'),
-                      ),
+                    child: JsonFormatterTextField(
+                      controller: jsonOutputController,
+                      readOnly: true,
+                      hintText: '{\n  "Key" : "Value"\n}',
+                      onCopy: () {
+                        copyToClipboard(jsonOutputController.text);
+                      },
                     ),
                   ),
                 ],
