@@ -19,7 +19,7 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
     try {
       final input = jsonInputController.text;
       final jsonObject = json.decode(input);
-      const jsonEncoder = JsonEncoder.withIndent('  ');
+      const jsonEncoder = JsonEncoder.withIndent('    ');
       final formattedJson = jsonEncoder.convert(jsonObject);
       jsonOutputController.text = formattedJson;
     } catch (e) {
