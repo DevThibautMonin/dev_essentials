@@ -1,4 +1,4 @@
-# dev_essentials
+# DevEssentials
  Tools for developers, only the essentials.
 
 # Features
