@@ -6,7 +6,8 @@
 
 # Screenshots
 
+### JSON Formatter
+![JSON Formatter Screen](./assets/screenshots/json_formatter.png)
+
 # Roadmap
 - Lorem ipsum generator
-- 
-![JSON Formatter Screen](./assets/screenshots/json_formatter.png)
