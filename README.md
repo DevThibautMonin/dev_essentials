@@ -11,3 +11,4 @@
 
 # Roadmap
 - Lorem ipsum generator
+- Color Picker
