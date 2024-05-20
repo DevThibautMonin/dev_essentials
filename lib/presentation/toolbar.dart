@@ -10,7 +10,6 @@ class Toolbar extends StatefulWidget {
 }
 
 class _ToolbarState extends State<Toolbar> {
-  String selectedTool = "";
 
   @override
   Widget build(BuildContext context) {
