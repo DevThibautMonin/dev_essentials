@@ -26,6 +26,9 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 
+# Ignore .DS_Store
+.DS_Store
+
 # Ignore generated files
 *.g.dart
 .fvm
