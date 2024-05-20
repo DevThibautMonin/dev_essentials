@@ -1,3 +1,4 @@
+import 'package:dev_essentials/widgets/colors.dart';
 import 'package:dev_essentials/widgets/tool_item.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +10,13 @@ class Toolbar extends StatefulWidget {
 }
 
 class _ToolbarState extends State<Toolbar> {
+  String selectedTool = "";
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 6, 90, 134)),
+        decoration: const BoxDecoration(color: CustomColors.primaryColor),
         child: Column(
           children: [
             const Padding(
@@ -29,10 +32,11 @@ class _ToolbarState extends State<Toolbar> {
             Expanded(
               child: ListView(
                 children: const [
-                  ToolItem(icon: Icons.code, title: "JSON Formatter"),
+                  ToolItem(icon: Icons.code, title: "JSON Formatter", isSelected: false),
+                  ToolItem(icon: Icons.onetwothree, title: "Char Counter", isSelected: true),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
