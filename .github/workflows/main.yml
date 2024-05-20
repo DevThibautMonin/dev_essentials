@@ -28,7 +28,7 @@ name: Flutter macOS Build
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build_macos:
