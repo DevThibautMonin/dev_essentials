@@ -22,4 +22,4 @@ jobs:
         with:
           artifacts: "build/macos/Build/Products/Release/*.app"
           tag: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WORKFLOW_SECRET }}
