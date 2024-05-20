@@ -21,15 +21,15 @@ class ToolItem extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected ? const Color.fromARGB(255, 42, 172, 241) : const Color.fromARGB(255, 21, 131, 190),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              color: isSelected ? const Color.fromARGB(255, 42, 172, 241) : const Color.fromARGB(255, 21, 131, 190),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
-          ),
-          child: GestureDetector(
-            onTap: onTap,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
