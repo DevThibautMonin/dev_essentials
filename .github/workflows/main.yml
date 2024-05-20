@@ -1,25 +1,57 @@
-name: Flutter macOS Release
+# name: Flutter macOS Release
+
+# on:
+#   push:
+#     branches:
+#       - master
+#     # tags:
+#     #   - 'v*'
+
+# jobs:
+#   build_macos:
+#     runs-on: macos-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: subosito/flutter-action@v2
+#         with:
+#           channel: 'stable'
+#       - run: flutter config --enable-macos-desktop
+#       - run: flutter pub get
+#       - run: flutter build macos --release
+#       - uses: ncipollo/release-action@v1
+#         with:
+#           artifacts: "build/macos/Build/Products/Release/*.app"
+#           tag: v0.0.1
+#           token: ${{ secrets.WORKFLOW_SECRET }}
+name: Flutter macOS Build
 
 on:
   push:
     branches:
-      - master
-    # tags:
-    #   - 'v*'
+      - main
 
 jobs:
   build_macos:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
       - run: flutter config --enable-macos-desktop
       - run: flutter pub get
+
       - run: flutter build macos --release
-      - uses: ncipollo/release-action@v1
+
+      - name: Create DMG
+        run: |
+          hdiutil create -volname "dev_essentials" -srcfolder "build/macos/Build/Products/Release/dev_essentials.app" -ov -format UDZO dev_essentials.dmg
+
+      - uses: actions/upload-artifact@v3
         with:
-          artifacts: "build/macos/Build/Products/Release/*.app"
-          tag: v0.0.1
-          token: ${{ secrets.WORKFLOW_SECRET }}
+          name: macOS_App
+          path: |
+            build/macos/Build/Products/Release/dev_essentials.app
+            build/macos/Build/Products/Release/dev_essentials.dmg
