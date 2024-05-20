@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class ToolItem extends StatelessWidget {
   final IconData icon;
   final String title;
+  final bool isSelected;
 
   const ToolItem({
     super.key,
     required this.icon,
     required this.title,
+    required this.isSelected,
   });
 
   @override
@@ -18,9 +20,9 @@ class ToolItem extends StatelessWidget {
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 21, 131, 190),
-            borderRadius: BorderRadius.all(
+          decoration: BoxDecoration(
+            color: isSelected ? const Color.fromARGB(255, 42, 172, 241) : const Color.fromARGB(255, 21, 131, 190),
+            borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
           ),
