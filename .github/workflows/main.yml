@@ -3,7 +3,7 @@ name: Flutter macOS Release
 on:
   push:
     branches:
-      - main
+      - master
     # tags:
     #   - 'v*'
 
