@@ -5,12 +5,14 @@ class ToolItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool isSelected;
+  final VoidCallback onTap;
 
   const ToolItem({
     super.key,
     required this.icon,
     required this.title,
     required this.isSelected,
+    required this.onTap,
   });
 
   @override
@@ -27,7 +29,7 @@ class ToolItem extends StatelessWidget {
             ),
           ),
           child: GestureDetector(
-            onTap: () {},
+            onTap: onTap,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Row(

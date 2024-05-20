@@ -10,7 +10,6 @@ class Toolbar extends StatefulWidget {
 }
 
 class _ToolbarState extends State<Toolbar> {
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -30,9 +29,19 @@ class _ToolbarState extends State<Toolbar> {
             ),
             Expanded(
               child: ListView(
-                children: const [
-                  ToolItem(icon: Icons.code, title: "JSON Formatter", isSelected: false),
-                  ToolItem(icon: Icons.onetwothree, title: "Char Counter", isSelected: true),
+                children: [
+                  ToolItem(
+                    icon: Icons.code,
+                    title: "JSON Formatter",
+                    isSelected: false,
+                    onTap: () {},
+                  ),
+                  ToolItem(
+                    icon: Icons.onetwothree,
+                    title: "Char Counter",
+                    isSelected: true,
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
