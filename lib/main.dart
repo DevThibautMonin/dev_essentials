@@ -1,4 +1,4 @@
-import 'package:dev_essentials/presentation/tool_screen.dart';
+import 'package:dev_essentials/presentation/content_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const Scaffold(
         body: SafeArea(
-          child: ToolScreen(),
+          child: ContentScreen(),
         ),
       ),
     );
