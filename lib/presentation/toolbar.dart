@@ -5,7 +5,12 @@ import 'package:dev_essentials/widgets/tool_item.dart';
 import 'package:flutter/material.dart';
 
 class Toolbar extends StatefulWidget {
-  const Toolbar({super.key});
+  final Function(String) onToolChanged;
+
+  const Toolbar({
+    super.key,
+    required this.onToolChanged,
+  });
 
   @override
   State<Toolbar> createState() => _ToolbarState();
@@ -51,6 +56,7 @@ class _ToolbarState extends State<Toolbar> {
                     isSelected: _selectedIndex == index,
                     onTap: () {
                       onToolSelected(index);
+                      widget.onToolChanged(tools[index].widget.toString());
                     },
                   );
                 },

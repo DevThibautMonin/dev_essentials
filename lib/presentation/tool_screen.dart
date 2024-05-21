@@ -4,32 +4,48 @@ import 'package:dev_essentials/presentation/toolbar.dart';
 import 'package:dev_essentials/widgets/colors.dart';
 import 'package:flutter/material.dart';
 
-class ToolScreen extends StatelessWidget {
+class ToolScreen extends StatefulWidget {
   const ToolScreen({super.key});
+
+  @override
+  State<ToolScreen> createState() => _ToolScreenState();
+}
+
+class _ToolScreenState extends State<ToolScreen> {
+  String currentWidget = "";
+
+  Widget _buildDynamicWidget() {
+    switch (currentWidget) {
+      case "JsonFormatterScreen":
+        return const JsonFormatterScreen();
+      case "CharCounterScreen":
+        return const CharCounterScreen();
+      default:
+        return const Center(child: Text("Select a tool"));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Flexible(
+        Flexible(
           flex: 2,
           child: Column(
             children: [
-              Toolbar(),
+              Toolbar(
+                onToolChanged: (p0) {
+                  setState(() {
+                    currentWidget = p0;
+                  });
+                },
+              ),
             ],
           ),
         ),
         Flexible(
           flex: 8,
-          child: Container(
-            color: CustomColors.primaryColor,
-            child: const Column(
-              children: [
-                // JsonFormatterScreen(),
-                CharCounterScreen()
-              ],
-            ),
-          ),
+          child: Container(color: CustomColors.primaryColor, child: _buildDynamicWidget()),
         ),
       ],
     );

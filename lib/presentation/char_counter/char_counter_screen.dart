@@ -52,56 +52,54 @@ class _CharCounterScreenState extends State<CharCounterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Expanded(
-            flex: 8,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Card(
-                color: Colors.white,
-                child: TextField(
-                  controller: textController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
-                  ),
-                  maxLines: null,
+    return Column(
+      children: [
+        Expanded(
+          flex: 8,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Card(
+              color: Colors.white,
+              child: TextField(
+                controller: textController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10),
                 ),
+                maxLines: null,
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CharCounterCard(
-                      counter: _charCount.toString(),
-                      text: "Characters",
-                    ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CharCounterCard(
+                    counter: _charCount.toString(),
+                    text: "Characters",
                   ),
-                  Expanded(
-                    child: CharCounterCard(
-                      counter: _wordCount.toString(),
-                      text: "Words",
-                    ),
+                ),
+                Expanded(
+                  child: CharCounterCard(
+                    counter: _wordCount.toString(),
+                    text: "Words",
                   ),
-                  Expanded(
-                    child: CharCounterCard(
-                      counter: _sentenceCount.toString(),
-                      text: "Sentences",
-                    ),
+                ),
+                Expanded(
+                  child: CharCounterCard(
+                    counter: _sentenceCount.toString(),
+                    text: "Sentences",
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

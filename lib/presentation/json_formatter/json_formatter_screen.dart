@@ -36,60 +36,56 @@ class _JsonFormatterScreenState extends State<JsonFormatterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: JsonFormatterTextField(
-                        controller: jsonInputController,
-                        readOnly: false,
-                        hintText: '{ "Key": "Value" }',
-                        onCopy: () {
-                          copyToClipboard(jsonInputController.text);
-                        },
-                        onChanged: (value) {
-                          formatJson();
-                        },
-                      ),
-                    ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: JsonFormatterTextField(
+                    controller: jsonInputController,
+                    readOnly: false,
+                    hintText: '{ "Key": "Value" }',
+                    onCopy: () {
+                      copyToClipboard(jsonInputController.text);
+                    },
+                    onChanged: (value) {
+                      formatJson();
+                    },
                   ),
-                ],
+                ),
               ),
-            ),
-            Gaps.gap10W,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: JsonFormatterTextField(
-                        controller: jsonOutputController,
-                        readOnly: true,
-                        hintText: '{\n  "Key" : "Value"\n}',
-                        onCopy: () {
-                          copyToClipboard(jsonOutputController.text);
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+        Gaps.gap10W,
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: JsonFormatterTextField(
+                    controller: jsonOutputController,
+                    readOnly: true,
+                    hintText: '{\n  "Key" : "Value"\n}',
+                    onCopy: () {
+                      copyToClipboard(jsonOutputController.text);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
