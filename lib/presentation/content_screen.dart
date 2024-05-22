@@ -51,7 +51,7 @@ class _ContentScreenState extends State<ContentScreen> {
         ),
         Flexible(
           flex: 8,
-          child: Container(color: CustomColors.primaryColor, child: _buildDynamicWidget()),
+          child: Container(color: CustomColors.tertiaryColor, child: _buildDynamicWidget()),
         ),
       ],
     );
