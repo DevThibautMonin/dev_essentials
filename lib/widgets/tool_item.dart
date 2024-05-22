@@ -1,3 +1,4 @@
+import 'package:dev_essentials/widgets/colors.dart';
 import 'package:dev_essentials/widgets/gaps.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class ToolItem extends StatelessWidget {
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
-              color: isSelected ? const Color.fromARGB(255, 42, 172, 241) : const Color.fromARGB(255, 21, 131, 190),
+              color: isSelected ? CustomColors.secondaryColor : CustomColors.tertiaryColor,
               borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),
