@@ -23,10 +23,12 @@ class ToolsScreen extends StatelessWidget {
                         color: Colors.white,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               tools[index].title,
-                              style: const TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,
                             ),
                             SizedBox(
                               width: 24,
