@@ -40,6 +40,13 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
     return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ${paragraphs.join('\n\n')}";
   }
 
+  void copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Texte copié')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,6 +73,12 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
                     _sentenceCount = value;
                     textController.text = _generateRandomText(_sentenceCount.round());
                   });
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.copy),
+                onPressed: () {
+                  copyToClipboard(textController.text);
                 },
               ),
             ],
