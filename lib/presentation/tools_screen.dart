@@ -20,6 +20,7 @@ class ToolsScreen extends StatelessWidget {
                       width: 180,
                       height: 180,
                       child: Card(
+                        elevation: 5,
                         color: Colors.white,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
