@@ -3,7 +3,7 @@ import 'package:dev_essentials/presentation/text_generator/text_generator_screen
 import 'package:dev_essentials/presentation/tools_screen.dart';
 import 'package:dev_essentials/presentation/json_formatter/json_formatter_screen.dart';
 import 'package:dev_essentials/presentation/toolbar.dart';
-import 'package:dev_essentials/widgets/colors.dart';
+import 'package:dev_essentials/commons/colors.dart';
 import 'package:flutter/material.dart';
 
 class ContentScreen extends StatefulWidget {

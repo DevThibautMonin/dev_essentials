@@ -1,4 +1,4 @@
-import 'package:dev_essentials/widgets/colors.dart';
+import 'package:dev_essentials/commons/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

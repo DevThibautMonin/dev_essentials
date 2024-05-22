@@ -1,5 +1,5 @@
 import 'package:dev_essentials/presentation/tools.dart';
-import 'package:dev_essentials/widgets/colors.dart';
+import 'package:dev_essentials/commons/colors.dart';
 import 'package:dev_essentials/widgets/tool_item.dart';
 import 'package:flutter/material.dart';
 

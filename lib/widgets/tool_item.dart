@@ -1,5 +1,5 @@
-import 'package:dev_essentials/widgets/colors.dart';
-import 'package:dev_essentials/widgets/gaps.dart';
+import 'package:dev_essentials/commons/colors.dart';
+import 'package:dev_essentials/commons/gaps.dart';
 import 'package:flutter/material.dart';
 
 class ToolItem extends StatelessWidget {

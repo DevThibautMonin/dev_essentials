@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dev_essentials/presentation/json_formatter/json_formatter_textfield.dart';
-import 'package:dev_essentials/widgets/gaps.dart';
+import 'package:dev_essentials/commons/gaps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
