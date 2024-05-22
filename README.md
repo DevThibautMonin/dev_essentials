@@ -4,6 +4,7 @@
 # Features
 - JSON Formatter
 - Char Counter
+- Text Generator
 
 # Screenshots
 
@@ -14,5 +15,4 @@
 ![Char Counter Screen](./assets/screenshots/char_counter.png)
 
 # Roadmap
-- Lorem ipsum generator
 - Color Picker
