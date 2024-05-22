@@ -79,6 +79,7 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
               color: Colors.white,
               elevation: 4,
               child: TextField(
+                readOnly: true,
                 controller: textController,
                 maxLines: null,
                 expands: true,
