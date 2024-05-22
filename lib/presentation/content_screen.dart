@@ -1,4 +1,5 @@
 import 'package:dev_essentials/presentation/char_counter/char_counter_screen.dart';
+import 'package:dev_essentials/presentation/text_generator/text_generator_screen.dart';
 import 'package:dev_essentials/presentation/tools_screen.dart';
 import 'package:dev_essentials/presentation/json_formatter/json_formatter_screen.dart';
 import 'package:dev_essentials/presentation/toolbar.dart';
@@ -23,6 +24,8 @@ class _ContentScreenState extends State<ContentScreen> {
         return const JsonFormatterScreen();
       case "CharCounterScreen":
         return const CharCounterScreen();
+      case "TextGeneratorScreen":
+        return const TextGeneratorScreen();
       default:
         return const ToolsScreen();
     }
