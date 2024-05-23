@@ -61,17 +61,11 @@ jobs:
 
       - run: flutter build macos --release  # Construire pour macOS
 
-      - run: flutter build windows --release  # Construire pour Windows
-
-      - run: flutter build linux --release  # Construire pour Linux
-
       - uses: actions/upload-artifact@v3  # Stocker les artefacts
         with:
           name: release-artifacts
           path: |
             build/macos/Build/Products/Release/*.dmg
-            build/windows/runner/*.exe
-            build/linux/release/*.tar.gz  # Ou autre format approprié
 
   release:
     needs: build  # Attendre que la construction soit terminée
@@ -85,5 +79,3 @@ jobs:
         with:
           files: |
             *.dmg
-            *.exe
-            *.tar.gz
