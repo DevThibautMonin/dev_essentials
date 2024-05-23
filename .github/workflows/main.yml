@@ -1,81 +1,94 @@
-# name: Build and Release
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   build-and-release-macos:
-#     runs-on: macos-latest
-#     steps:
-#       - name: Clone repository
-#         uses: actions/checkout@v4
-
-#       - name: Set up Flutter
-#         uses: subosito/flutter-action@v2
-#         with:
-#           channel: stable
-
-#       - name: Get dependencies and build
-#         run: |
-#           flutter pub get
-
-#       - name: Enable and build for macOS
-#         run: |
-#           flutter config --enable-macos-desktop
-#           flutter build macos --release
-
-#       - name: Archive Release
-#         uses: thedoctor0/zip-release@master
-#         with:
-#           type: 'zip'
-#           filename: DevEssentials-${{ github.ref_name }}-macos.zip
-#           directory: build/macos/Build/Products/Release
-
-#       - name: macOS Release
-#         uses: softprops/action-gh-release@v1
-#         if: startsWith(github.ref, 'refs/tags/')
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           files: build/macos/Build/Products/Release/DevEssentials-${{ github.ref_name }}-macos.zip
-name: Build and Release
-
-on:
+name: macOS Build and Release
+'on':
   push:
     branches:
-      - master  # Déclencher le workflow sur les push vers la branche main
-
+      - master
 jobs:
-  build:
-    runs-on: macos-latest  # Exécuter sur un runner macOS
+  on-push-main:
+    runs-on: macos-latest
+
+    env:
+      MACOS_APP_RELEASE_PATH: build/macos/Build/Products/Release
+
     steps:
-      - uses: actions/checkout@v3  # Récupérer le code source
-
-      - uses: subosito/flutter-action@v2  # Installer Flutter
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'  # Utiliser la version stable de Flutter
+          channel: stable
 
-      - run: flutter pub get  # Récupérer les dépendances
+      - name: Enable Macos
+        run: flutter config --enable-macos-desktop
 
-      - run: flutter build macos --release  # Construire pour macOS
+      - name: Build macOS app
+        run: flutter build macos --release
 
-      - uses: actions/upload-artifact@v3  # Stocker les artefacts
+      - name: Codesign executable
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          IDENTITY: ${{ secrets.IDENTITY }}
+        run: |
+          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+          echo "Create Keychain"
+          security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
+          echo "Assign to Login Keychain"
+          security default-keychain -s build.keychain
+          echo "Unlock the Login Keychain"
+          security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
+          echo "Import certificate"
+          security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          echo "Set Key Partition"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
+          echo "Sign the app"
+          /usr/bin/codesign --force --deep -s $IDENTITY ./$MACOS_APP_RELEASE_PATH/dev_essentials.app
+      - name: Create a dmg
+        run: |
+          echo "Install create-dmg"
+          brew install create-dmg
+          cd $MACOS_APP_RELEASE_PATH
+          create-dmg \
+            --volname "dev_essentials" \
+            --window-pos 200 120 \
+            --window-size 800 529 \
+            --icon-size 130 \
+            --text-size 14 \
+            --icon "dev_essentials.app" 260 250 \
+            --hide-extension "dev_essentials.app" \
+            --app-drop-link 540 250 \
+            --hdiutil-quiet \
+            "dev_essentials.dmg" \
+            "dev_essentials.app"
+      - name: Create Version Number
+        id: versions
+        run: |
+          git fetch
+          VERSION_WITHOUT_SUFFIX="$(grep 'version:' pubspec.yaml | awk '{ print $2 }' | cut -d'+' -f 1)"
+          function parse_git_hash() {
+            git rev-list --count origin/main
+          }
+          MAIN_COUNT=$(parse_git_hash)
+          APP_VERSION="$VERSION_WITHOUT_SUFFIX+$MAIN_COUNT"
+          echo "::set-output name=version::$(echo $APP_VERSION)"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: release-artifacts
-          path: |
-            build/macos/Build/Products/Release/*.dmg
-
-  release:
-    needs: build  # Attendre que la construction soit terminée
-    runs-on: ubuntu-latest  # Exécuter la release sur un runner Linux (moins cher)
-    steps:
-      - uses: actions/download-artifact@v3  # Récupérer les artefacts
+          tag_name: ${{ steps.versions.outputs.version }}
+          release_name: Release ${{ steps.versions.outputs.version }}
+          body: |
+             Release Notes
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: release-artifacts
-
-      - uses: softprops/action-gh-release@v1  # Créer une release GitHub
-        with:
-          files: |
-            *.dmg
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/macos/Build/Products/Release/dev_essentials.dmg
+          asset_name: dev_essentials.dmg
+          asset_content_type: application/octet-stream
