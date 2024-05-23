@@ -1,42 +1,89 @@
+# name: Build and Release
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build-and-release-macos:
+#     runs-on: macos-latest
+#     steps:
+#       - name: Clone repository
+#         uses: actions/checkout@v4
+
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           channel: stable
+
+#       - name: Get dependencies and build
+#         run: |
+#           flutter pub get
+
+#       - name: Enable and build for macOS
+#         run: |
+#           flutter config --enable-macos-desktop
+#           flutter build macos --release
+
+#       - name: Archive Release
+#         uses: thedoctor0/zip-release@master
+#         with:
+#           type: 'zip'
+#           filename: DevEssentials-${{ github.ref_name }}-macos.zip
+#           directory: build/macos/Build/Products/Release
+
+#       - name: macOS Release
+#         uses: softprops/action-gh-release@v1
+#         if: startsWith(github.ref, 'refs/tags/')
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           files: build/macos/Build/Products/Release/DevEssentials-${{ github.ref_name }}-macos.zip
 name: Build and Release
 
 on:
   push:
     branches:
-      - master
+      - main  # Déclencher le workflow sur les push vers la branche main
 
 jobs:
-  build-and-release-macos:
-    runs-on: macos-latest
+  build:
+    runs-on: macos-latest  # Exécuter sur un runner macOS
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3  # Récupérer le code source
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2  # Installer Flutter
         with:
-          channel: stable
+          channel: 'stable'  # Utiliser la version stable de Flutter
 
-      - name: Get dependencies and build
-        run: |
-          flutter pub get
+      - run: flutter pub get  # Récupérer les dépendances
 
-      - name: Enable and build for macOS
-        run: |
-          flutter config --enable-macos-desktop
-          flutter build macos --release
+      - run: flutter build macos --release  # Construire pour macOS
 
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
+      - run: flutter build windows --release  # Construire pour Windows
+
+      - run: flutter build linux --release  # Construire pour Linux
+
+      - uses: actions/upload-artifact@v3  # Stocker les artefacts
         with:
-          type: 'zip'
-          filename: DevEssentials-${{ github.ref_name }}-macos.zip
-          directory: build/macos/Build/Products/Release
+          name: release-artifacts
+          path: |
+            build/macos/Build/Products/Release/*.dmg
+            build/windows/runner/*.exe
+            build/linux/release/*.tar.gz  # Ou autre format approprié
 
-      - name: macOS Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  release:
+    needs: build  # Attendre que la construction soit terminée
+    runs-on: ubuntu-latest  # Exécuter la release sur un runner Linux (moins cher)
+    steps:
+      - uses: actions/download-artifact@v3  # Récupérer les artefacts
         with:
-          files: build/macos/Build/Products/Release/DevEssentials-${{ github.ref_name }}-macos.zip
+          name: release-artifacts
+
+      - uses: softprops/action-gh-release@v1  # Créer une release GitHub
+        with:
+          files: |
+            *.dmg
+            *.exe
+            *.tar.gz
