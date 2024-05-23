@@ -31,8 +31,10 @@ doc/api/
 
 # Ignore generated files
 *.g.dart
-.fvm
 
 # Ignore IDE
 .idea/
 .vscode/
+
+# FVM Version Cache
+.fvm/
