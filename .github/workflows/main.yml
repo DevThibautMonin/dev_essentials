@@ -63,7 +63,7 @@ jobs:
       - name: Create Version Number
         id: versions
         run: |
-          APP_VERSION=0.0.1
+          APP_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
           echo "::set-output name=version::$(echo $APP_VERSION)"
 
       - name: Create Release
@@ -72,10 +72,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.versions.outputs.version }}
-          release_name: Release ${{ steps.versions.outputs.version }}
+          tag_name: ${{ env.APP_VERSION }}
+          release_name: Release ${{ env.APP_VERSION }}
           body: |
-             Release Notes
+            Release Notes
           draft: false
           prerelease: false
 
@@ -85,7 +85,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/macos/Build/Products/Release/dev_essentials.dmg
-          asset_name: dev_essentials.dmg
-          asset_content_type: application/octet-stream
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{ env.MACOS_APP_RELEASE_PATH }}/dev_essentials.dmg # Chemin complet
+          asset_name: dev_essentials-${{ env.APP_VERSION }}.dmg # Nom avec la version
+          asset_content_type: application/octet-stream 
