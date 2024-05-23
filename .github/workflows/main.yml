@@ -22,26 +22,26 @@ jobs:
       - name: Build macOS app
         run: flutter build macos --release
 
-      - name: Codesign executable
-        env:
-          MACOS_CERTIFICATE: ${{ secrets.CERTIFICATE }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.CERTIFICATE_PASSWORD }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-          IDENTITY: ${{ secrets.IDENTITY }}
-        run: |
-          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
-          echo "Create Keychain"
-          security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
-          echo "Assign to Login Keychain"
-          security default-keychain -s build.keychain
-          echo "Unlock the Login Keychain"
-          security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
-          echo "Import certificate"
-          security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          echo "Set Key Partition"
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
-          echo "Sign the app"
-          /usr/bin/codesign --force --deep -s $IDENTITY ./$MACOS_APP_RELEASE_PATH/dev_essentials.app
+      # - name: Codesign executable
+      #   env:
+      #     MACOS_CERTIFICATE: ${{ secrets.CERTIFICATE }}
+      #     MACOS_CERTIFICATE_PWD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      #     KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      #     IDENTITY: ${{ secrets.IDENTITY }}
+      #   run: |
+      #     echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+      #     echo "Create Keychain"
+      #     security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
+      #     echo "Assign to Login Keychain"
+      #     security default-keychain -s build.keychain
+      #     echo "Unlock the Login Keychain"
+      #     security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
+      #     echo "Import certificate"
+      #     security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+      #     echo "Set Key Partition"
+      #     security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
+      #     echo "Sign the app"
+      #     /usr/bin/codesign --force --deep -s $IDENTITY ./$MACOS_APP_RELEASE_PATH/dev_essentials.app
       - name: Create a dmg
         run: |
           echo "Install create-dmg"
