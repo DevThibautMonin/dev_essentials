@@ -55,9 +55,9 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const Text(
-                "Sentences",
-                style: TextStyle(
+              Text(
+                "Sentences (${_sentenceCount.toInt()})",
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
