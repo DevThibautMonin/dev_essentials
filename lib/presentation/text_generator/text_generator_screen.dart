@@ -76,7 +76,7 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.copy),
+                icon: const Icon(Icons.copy),
                 onPressed: () {
                   copyToClipboard(textController.text);
                 },
