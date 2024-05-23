@@ -45,7 +45,7 @@ name: Build and Release
 on:
   push:
     branches:
-      - main  # Déclencher le workflow sur les push vers la branche main
+      - master  # Déclencher le workflow sur les push vers la branche main
 
 jobs:
   build:
