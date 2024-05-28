@@ -1,10 +1,11 @@
+import 'package:dev_essentials/commons/enums/tools_enum.dart';
 import 'package:dev_essentials/presentation/tools.dart';
 import 'package:dev_essentials/commons/colors.dart';
 import 'package:dev_essentials/widgets/tool_item.dart';
 import 'package:flutter/material.dart';
 
 class Toolbar extends StatefulWidget {
-  final Function(String) onToolChanged;
+  final Function(ToolsEnum) onToolChanged;
 
   const Toolbar({
     super.key,
@@ -51,7 +52,7 @@ class _ToolbarState extends State<Toolbar> {
                     isSelected: _selectedIndex == index,
                     onTap: () {
                       onToolSelected(index);
-                      widget.onToolChanged(tools[index].widget.toString());
+                      widget.onToolChanged(tools[index].widget);
                     },
                   );
                 },

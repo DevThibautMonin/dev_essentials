@@ -1,3 +1,4 @@
+import 'package:dev_essentials/commons/enums/tools_enum.dart';
 import 'package:dev_essentials/presentation/char_counter/char_counter_screen.dart';
 import 'package:dev_essentials/presentation/text_generator/text_generator_screen.dart';
 import 'package:dev_essentials/presentation/tools_screen.dart';
@@ -14,17 +15,17 @@ class ContentScreen extends StatefulWidget {
 }
 
 class _ContentScreenState extends State<ContentScreen> {
-  String currentWidget = "";
+  ToolsEnum currentWidget = ToolsEnum.tools;
 
   Widget _buildDynamicWidget() {
     switch (currentWidget) {
-      case "ToolsScreen":
+      case ToolsEnum.tools:
         return const ToolsScreen();
-      case "JsonFormatterScreen":
+      case ToolsEnum.jsonFormatter:
         return const JsonFormatterScreen();
-      case "CharCounterScreen":
+      case ToolsEnum.charCounter:
         return const CharCounterScreen();
-      case "TextGeneratorScreen":
+      case ToolsEnum.textGenerator:
         return const TextGeneratorScreen();
       default:
         return const ToolsScreen();
