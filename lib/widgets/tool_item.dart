@@ -34,7 +34,7 @@ class ToolItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Icon(
                     icon,
