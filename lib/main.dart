@@ -1,4 +1,6 @@
 import 'package:dev_essentials/presentation/content_screen.dart';
+import 'package:dev_essentials/themes/dark_theme.dart';
+import 'package:dev_essentials/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,9 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DevEssentials',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: const Scaffold(
         body: SafeArea(
           child: ContentScreen(),

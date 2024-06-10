@@ -1,5 +1,6 @@
 import 'package:dev_essentials/commons/enums/tools_enum.dart';
 import 'package:dev_essentials/presentation/char_counter/char_counter_screen.dart';
+import 'package:dev_essentials/presentation/qr_code_generator/qr_code_screen.dart';
 import 'package:dev_essentials/presentation/text_generator/text_generator_screen.dart';
 import 'package:dev_essentials/presentation/tools_screen.dart';
 import 'package:dev_essentials/presentation/json_formatter/json_formatter_screen.dart';
@@ -27,6 +28,8 @@ class _ContentScreenState extends State<ContentScreen> {
         return const CharCounterScreen();
       case ToolsEnum.textGenerator:
         return const TextGeneratorScreen();
+      case ToolsEnum.qrCodeGenerator:
+        return const QrCodeScreen();
       default:
         return const ToolsScreen();
     }

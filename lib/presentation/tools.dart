@@ -6,6 +6,7 @@ List<Tool> tools = [
   const Tool(title: "JSON Formatter", icon: Icons.code, widget: ToolsEnum.jsonFormatter),
   const Tool(title: "Char Counter", icon: Icons.onetwothree, widget: ToolsEnum.charCounter),
   const Tool(title: "Text Generator", icon: Icons.text_increase, widget: ToolsEnum.textGenerator),
+  const Tool(title: "QR Code Generator", icon: Icons.qr_code, widget: ToolsEnum.qrCodeGenerator),
 ];
 
 class Tool {

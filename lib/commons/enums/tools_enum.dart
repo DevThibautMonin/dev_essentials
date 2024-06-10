@@ -3,4 +3,5 @@ enum ToolsEnum {
   jsonFormatter,
   charCounter,
   textGenerator,
+  qrCodeGenerator,
 }
