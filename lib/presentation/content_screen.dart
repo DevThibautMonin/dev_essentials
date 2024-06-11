@@ -7,6 +7,7 @@ import 'package:dev_essentials/presentation/json_formatter/json_formatter_screen
 import 'package:dev_essentials/presentation/toolbar.dart';
 import 'package:dev_essentials/commons/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class ContentScreen extends StatefulWidget {
   const ContentScreen({super.key});
@@ -16,6 +17,7 @@ class ContentScreen extends StatefulWidget {
 }
 
 class _ContentScreenState extends State<ContentScreen> {
+  String? version = "";
   ToolsEnum currentWidget = ToolsEnum.tools;
 
   Widget _buildDynamicWidget() {
@@ -36,6 +38,17 @@ class _ContentScreenState extends State<ContentScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getVersion();
+  }
+
+  void _getVersion() async {
+    var infos = await PackageInfo.fromPlatform();
+    version = infos.version;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
@@ -49,6 +62,7 @@ class _ContentScreenState extends State<ContentScreen> {
                     currentWidget = p0;
                   });
                 },
+                version: version,
               ),
             ],
           ),

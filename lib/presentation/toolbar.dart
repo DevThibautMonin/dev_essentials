@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 
 class Toolbar extends StatefulWidget {
   final Function(ToolsEnum) onToolChanged;
+  final String? version;
 
   const Toolbar({
     super.key,
     required this.onToolChanged,
+    this.version,
   });
 
   @override
@@ -38,6 +40,10 @@ class _ToolbarState extends State<Toolbar> {
                 "DevEssentials",
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
+            ),
+            Text(
+              widget.version ?? "",
+              style: const TextStyle(color: Colors.white),
             ),
             const Divider(
               color: Colors.white,
