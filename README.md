@@ -1,6 +1,11 @@
 # DevEssentials
  Tools for developers, only the essentials.
 
+ # Available platforms
+ - macOS Desktop (Soon)
+ - Web (Soon)
+ - Windows Desktop (Soon)
+
 # Features
 - JSON Formatter
 - Char Counter
