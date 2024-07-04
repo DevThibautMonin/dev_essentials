@@ -38,3 +38,4 @@ doc/api/
 
 # FVM Version Cache
 .fvm/
+.firebase/

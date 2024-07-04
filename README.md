@@ -3,7 +3,7 @@
 
  # Available platforms
  - macOS Desktop (Soon)
- - Web (Soon)
+ - [Web app](https://devessentials-d2968.web.app/)
  - Windows Desktop (Soon)
 
 # Features
