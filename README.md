@@ -4,6 +4,7 @@
 # Features
 - JSON Formatter
 - Char Counter
+- QR Code Generator
 - Text Generator
 
 # Screenshots
@@ -14,5 +15,10 @@
 ### Char Counter
 ![Char Counter Screen](./assets/screenshots/char_counter.png)
 
+### QR Code Generator
+
+### Text Generator
+
 # Roadmap
 - Color Picker
+- GUID Generator
