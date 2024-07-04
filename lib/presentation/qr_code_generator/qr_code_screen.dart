@@ -19,13 +19,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
+          child: Card(
             child: TextField(
               minLines: 5,
               maxLines: 10,

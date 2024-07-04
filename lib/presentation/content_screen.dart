@@ -5,7 +5,6 @@ import 'package:dev_essentials/presentation/text_generator/text_generator_screen
 import 'package:dev_essentials/presentation/tools_screen.dart';
 import 'package:dev_essentials/presentation/json_formatter/json_formatter_screen.dart';
 import 'package:dev_essentials/presentation/toolbar.dart';
-import 'package:dev_essentials/commons/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -69,7 +68,10 @@ class _ContentScreenState extends State<ContentScreen> {
         ),
         Flexible(
           flex: 8,
-          child: Container(color: CustomColors.tertiaryColor, child: _buildDynamicWidget()),
+          child: Container(
+            color: Colors.white,
+            child: _buildDynamicWidget(),
+          ),
         ),
       ],
     );

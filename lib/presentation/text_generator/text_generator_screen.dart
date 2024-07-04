@@ -58,7 +58,7 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
               Text(
                 "Sentences (${_sentenceCount.toInt()})",
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               Slider(
@@ -66,7 +66,7 @@ class _TextGeneratorScreenState extends State<TextGeneratorScreen> {
                 min: 1,
                 max: 100,
                 label: _sentenceCount.round().toString(),
-                thumbColor: Colors.white,
+                thumbColor: CustomColors.primaryColor,
                 activeColor: CustomColors.secondaryColor,
                 onChanged: (value) {
                   setState(() {

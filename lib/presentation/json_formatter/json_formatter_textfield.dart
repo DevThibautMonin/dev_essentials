@@ -20,22 +20,14 @@ class JsonFormatterTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 240, 240, 240),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
+        Card(
           child: TextField(
             controller: controller,
             readOnly: readOnly,
             maxLines: null,
             keyboardType: TextInputType.multiline,
             expands: true,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
-            ),
+            decoration: InputDecoration(border: InputBorder.none, hintText: hintText, contentPadding: const EdgeInsets.all(10)),
             onChanged: onChanged,
           ),
         ),
